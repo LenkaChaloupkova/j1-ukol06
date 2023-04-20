@@ -76,20 +76,28 @@ public class Aplikace extends JFrame {
     }
 
     private void handleVypocitat(ActionEvent actionEvent) {
-    getInputMethodListeners(husyField);
-    /*
-        String text1 = …;
-        int cislo1 = Integer.parseInt(text1);
-        int cislo2 = …;
-        String text2 = Integer.toString(cislo2);
-     */
+        //prevod textu na cislo:
+        String kraliciText = kraliciField.getText();
+        int pocetKraliku = Integer.parseInt(kraliciText);
+        // pripadne: pocetKraliku = Integer.parseInt(kraliciField.getText());
+        String husyText = husyField.getText();
+        int pocetHus = Integer.parseInt(husyText);
+
+        //vypocet poctu hlav a nohou:
+        int pocetHlav = pocetKraliku + pocetHus;
+        int pocetNohou = (pocetKraliku * 2) + pocetHus;
+
+        //nastaveni vypocteneho poctu
+        pocetHlavField.setText(Integer.toString(pocetHlav));
+        pocetNohouField.setText(Integer.toString(pocetNohou));
     }
 
     private JPanel createButtonBar() {
         vypocitatButton = new JButton("Vypočítat");
         vypocitatButton.setMnemonic('V');
+        add(vypocitatButton, "span");
 
-        JPanel buttonBar = new JPanel(new MigLayout(null, "[middle, grow]"));
+        JPanel buttonBar = new JPanel();
         buttonBar.add(vypocitatButton);
         return buttonBar;
     }
