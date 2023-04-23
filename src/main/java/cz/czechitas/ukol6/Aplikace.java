@@ -60,45 +60,36 @@ public class Aplikace extends JFrame {
         pocetHlavLabel = new JLabel("Počet hlav");
         pocetHlavLabel.setDisplayedMnemonic('P');
         pocetHlavLabel.setLabelFor(pocetHlavField);
+        pocetHlavField.setEditable(false);
         add(pocetHlavLabel);
         add(pocetHlavField);
+
 
         pocetNohouField = new JTextField();
         pocetNohouLabel = new JLabel("Počet nohou");
         pocetNohouLabel.setDisplayedMnemonic('N');
         pocetNohouLabel.setLabelFor(pocetNohouField);
+        pocetNohouField.setEditable(false);
         add(pocetNohouLabel);
         add(pocetNohouField);
         pack();
+
+        vypocitatButton = new JButton("Vypočítat");
+        vypocitatButton.setMnemonic('V');
+        add(vypocitatButton, "span");
 
         getRootPane().setDefaultButton(vypocitatButton);
         vypocitatButton.addActionListener(this::handleVypocitat);
     }
 
     private void handleVypocitat(ActionEvent actionEvent) {
-        //prevod textu na cislo:
-        String kraliciText = kraliciField.getText();
-        int pocetKraliku = Integer.parseInt(kraliciText);
-        // pripadne: pocetKraliku = Integer.parseInt(kraliciField.getText());
-        String husyText = husyField.getText();
-        int pocetHus = Integer.parseInt(husyText);
+        int pocetKraliku = Integer.parseInt(kraliciField.getText());
+        int pocetHus = Integer.parseInt(husyField.getText());
 
-        //vypocet poctu hlav a nohou:
         int pocetHlav = pocetKraliku + pocetHus;
         int pocetNohou = (pocetKraliku * 2) + pocetHus;
 
-        //nastaveni vypocteneho poctu
         pocetHlavField.setText(Integer.toString(pocetHlav));
         pocetNohouField.setText(Integer.toString(pocetNohou));
-    }
-
-    private JPanel createButtonBar() {
-        vypocitatButton = new JButton("Vypočítat");
-        vypocitatButton.setMnemonic('V');
-        add(vypocitatButton, "span");
-
-        JPanel buttonBar = new JPanel();
-        buttonBar.add(vypocitatButton);
-        return buttonBar;
     }
 }
